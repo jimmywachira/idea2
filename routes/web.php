@@ -10,8 +10,8 @@ Route::get('/about', fn () => view('about'))->name('about');
 
 Route::get('/ideas', [IdeaController::class, 'index'])->middleware('auth')->name('ideas.index');
 Route::get('/ideas/{idea}', [IdeaController::class, 'show'])->middleware('auth')->name('ideas.show');
-// Route::get('/ideas/create', [IdeaController::class, 'create'])->middleware('auth')->name('ideas.create');
-// Route::post('/ideas', [IdeaController::class, 'store'])->middleware('auth')->name('ideas.store');   
+Route::get('/ideas/create', [IdeaController::class, 'create'])->middleware('auth')->name('ideas.create');
+Route::post('/ideas', [IdeaController::class, 'store'])->middleware('auth')->name('ideas.store');   
 // Route::get('/ideas/{idea}/edit', [IdeaController::class, 'edit'])->middleware('auth')->name('ideas.edit');
 // Route::put('/ideas/{idea}', [IdeaController::class, 'update'])->middleware('auth')->name('ideas.update');
 Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->middleware('auth')->name('ideas.destroy');

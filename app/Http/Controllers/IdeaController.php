@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreIdeaRequest;
 use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
 
 class IdeaController extends Controller
@@ -16,16 +17,17 @@ class IdeaController extends Controller
      */
     public function index(Request $request)
     {
-        $status = request('status');
+        $user = Auth::user();
+        $status = request('status'); 
 
-        if ($status && ! in_array($status, ['Pending', 'InProgress', 'Completed'])) {
-            $status = null; // ignore invalid values
-        }
+        // if (! in_array($status, ['Pending', 'InProgress', 'Completed'])) {
+        //     $status = null;
+        // }
 
-        $ideas = auth()->user()->ideas()
+        $ideas = $user->ideas()
             ->when($status, function ($query, $status) {
                 $query->where('status', $status);
-            })->get();
+            })->latest('created_at')->get();
 
         return view('ideas.index', ['ideas' => $ideas, 'status' => $status]);
     }
@@ -35,15 +37,25 @@ class IdeaController extends Controller
      */
     public function create(): void
     {
-        //
+        
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreIdeaRequest $request): void
+    public function store(StoreIdeaRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        $validated = $request->validated();
+        
+        Auth::user()->ideas()->create([
+            'title' => $validated['title'],
+            'description' => $validated['description'] ?? null,
+            'status' => $validated['status'],
+            #'image' => $validated['image'] ?? null,
+            'links' => $validated['links'] ?? []
+        ]);
+        
+        return redirect()->route('ideas.index')->with('success', 'Idea created successfully!');
     }
 
     /**
@@ -75,7 +87,7 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea): \Illuminate\Http\RedirectResponse
     {
-        // $this->authorize('delete', $idea);
+        #$this->authorize('delete', $idea);
         $idea->delete();
         return redirect()->route('ideas.index')->with('success', 'Idea deleted successfully.');
     }

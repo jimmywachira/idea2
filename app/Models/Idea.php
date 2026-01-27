@@ -14,6 +14,13 @@ class Idea extends Model
     /** @use HasFactory<IdeaFactory> */
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'links',
+        'status',
+    ];
+
     protected $casts = [
         'links' => 'array',
         'status' => IdeaStatus::class, // enum cast

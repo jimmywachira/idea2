@@ -1,11 +1,7 @@
 <x-layout>
     <div class="max-w-3xl mx-auto px-4 py-8">
         <header class="mb-8">
-            <div class="flex m-4 justify-start items-center gap-2">
-                <a href="{{ route('ideas.index') }}" class="btn btn-outline text-sm font-medium"> 
-                    Back To Ideas
-                </a>
-            </div>
+            
 
             <h1 class="text-3xl font-bold mb-2">{{ $idea->title }}</h1>
             <x-ideas.status-label status="{{ $idea->status }}" />
@@ -50,6 +46,10 @@
         <div class="mt-8">
             <nav class="flex justify-end items-center m-4">
                 <div class="flex items-center gap-2">
+
+                <a href="{{ route('ideas.index') }}" class="btn btn-outline text-sm font-medium"> 
+                    Back To Ideas
+                </a>
                     
                 <a href="#" class="btn bg-primary text-white">Edit Idea</a>
                     <form action="{{ route('ideas.destroy', $idea) }}" method="POST">

@@ -1,6 +1,6 @@
 <x-layout title="About Us">
     <!-- Hero Section -->
-    <div class="hero min-h-[400px] text-white bg-base-100 rounded-box mb-12 mt-4">
+    <div class="hero text-white bg-base-100 rounded-box mb-12 mt-4">
         <div class="hero-content text-center">
             <div class="max-w-md">
                 <h1 class="text-5xl font-bold text-primary">Our Story</h1>

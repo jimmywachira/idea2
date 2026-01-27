@@ -1,5 +1,5 @@
-@props(['class' => ''])
+@props(['class' => '','is'=>'a'])
 
-<a {{ $attributes->merge(['class' => 'rounded-lg border border-border bg-base-100 shadow-sm p-4 text-sm ' . $class]) }}>
+<{{ $is }} {{ $attributes->merge(['class' => 'rounded-lg border border-border bg-base-100 shadow-sm p-4 text-sm ' . $class]) }}>
   {{ $slot }}
-</a>
+</{{ $is }}>
