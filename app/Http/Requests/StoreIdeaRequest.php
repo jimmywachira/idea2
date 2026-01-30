@@ -30,7 +30,9 @@ class StoreIdeaRequest extends FormRequest
             'status' => ['required', 'in:pending,in_progress,completed'],
             'links' => ['nullable', 'array'],
             'links.*' => ['url'],
-            // future: 'image' => ['nullable','image','max:5120']
+            'steps' => ['nullable', 'array'],
+            'steps.*' => ['string', 'max:255'],
+            'image_path' => ['nullable','image','max:5120']
         ];
     }
 }

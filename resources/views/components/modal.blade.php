@@ -1,7 +1,7 @@
 @props(['name' => 'modal', 'title' => 'Modal Title'])
 
 <div 
-    x-data="{ show: false, name: @js($name) }"
+    x-data="{ show: false, name: @js($name),newStep: '', steps: [] }"
     x-show="show"
     @open-modal.window="if ($event.detail?.name === name) show = true"
     @close-modal.window="show = false"
@@ -33,6 +33,6 @@
         </button>
       </div>
 
-      <div>{{$slot}}</div>
+      <div> {{$slot}} </div>
     </x-card>
 </div>

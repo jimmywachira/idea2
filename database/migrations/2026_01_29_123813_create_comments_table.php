@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Idea;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('steps', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idea_id')->constrained('ideas')->cascadeOnDelete();
-            $table->string('description');
-            $table->boolean('completed')->default(false);
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Idea::class)->constrained()->cascadeOnDelete();
+            $table->text('body');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('steps');
+        Schema::dropIfExists('comments');
     }
 };

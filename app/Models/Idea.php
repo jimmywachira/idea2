@@ -39,4 +39,24 @@ class Idea extends Model
     {
         return $this->hasMany(Step::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(IdeaLike::class);
+    }
+
+    public function likedBy(): bool
+    {
+        return $this->likes()->where('user_id', auth()->id())->exists();
+    }
+
+    public function likesCount(): int
+    {
+        return $this->likes()->count();
+    }
 }

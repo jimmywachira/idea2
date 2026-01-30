@@ -1,4 +1,4 @@
-<div class="navbar bg-base-200 p-2">
+<div class="navbar bg-base-200 p-2 capitalize">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
