@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title ?? 'Admin' }} - Ideas Platform</title>
-    <meta name="description" content="Admin Dashboard">
+    <title>{{ $title ?? 'Dashboard' }} - Ideas Platform</title>
+    <meta name="description" content="Ideas Dashboard">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,14 +19,10 @@
     @livewireStyles
 </head>
 
-<body class="antialiased bg-base-100 font-bold capitalize" style="font-family: 'Google Sans Code', sans-serif;">
-    <x-layout.navbar />
-
+<body class="antialiased bg-base-100 font-bold" style="font-family: 'Google Sans Code', sans-serif;">
     <main>
-        @yield('content')
+        {{ $slot }}
     </main>
-
-    <x-footer />
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7/dist/ionicons/ionicons.esm.js"></script>

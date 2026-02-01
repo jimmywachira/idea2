@@ -10,9 +10,15 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TeamController;
+use App\Livewire\Dashboard;
 
-Route::get('/', fn () => redirect('/ideas'))->name('home');
+Route::get('/', function () {
+    return auth()->check() ? redirect('/dashboard') : redirect('/login');
+})->name('home');
 Route::get('/about', fn () => view('about'))->name('about');
+
+// Dashboard - Main single-page application
+Route::get('/dashboard', Dashboard::class)->middleware('auth')->name('dashboard');
 
 // Ideas routes - index first, then specific routes
 Route::get('/ideas', [IdeaController::class, 'index'])->middleware('auth')->name('ideas.index');
