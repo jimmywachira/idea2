@@ -208,7 +208,7 @@
             </div>
         @endif
 
-        @include('ideas.form-modal')
+        @include('ideas.modal')
 
     </div>
 </x-layout>

@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TeamController;
 
 Route::get('/', fn () => redirect('/ideas'))->name('home');
 Route::get('/about', fn () => view('about'))->name('about');
@@ -45,6 +46,15 @@ Route::post('/ideas/{idea}/like', [LikeController::class, 'toggle'])
 Route::get('/users/{user}', [UserController::class, 'show'])->name('profiles.show');
 Route::get('/profile/edit', [UserController::class, 'edit'])->middleware('auth')->name('profiles.edit');
 Route::put('/profile', [UserController::class, 'update'])->middleware('auth')->name('profiles.update');
+
+// Team routes
+Route::middleware('auth')->group(function () {
+    Route::resource('teams', TeamController::class);
+    Route::post('/teams/{team}/members', [TeamController::class, 'addMember'])->name('teams.addMember');
+    Route::delete('/teams/{team}/members/{user}', [TeamController::class, 'removeMember'])->name('teams.removeMember');
+    Route::post('/teams/{team}/share-idea/{idea}', [TeamController::class, 'shareIdea'])->name('teams.shareIdea');
+    Route::delete('/teams/{team}/unshare-idea/{idea}', [TeamController::class, 'unshareIdea'])->name('teams.unshareIdea');
+});
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest')->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest')->name('register.store');

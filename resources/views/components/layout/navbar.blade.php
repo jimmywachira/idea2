@@ -1,4 +1,4 @@
-<div class="navbar bg-base-200 p-2" x-data="{ theme: localStorage.getItem('theme') || 'coffee' }" x-init="$watch('theme', val => { document.documentElement.setAttribute('data-theme', val); localStorage.setItem('theme', val); })">
+<div class="navbar bg-base-200 p-2" x-data="{ theme: localStorage.getItem('theme') || 'dark' }" x-init="$watch('theme', val => { document.documentElement.setAttribute('data-theme', val); localStorage.setItem('theme', val); })">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -40,11 +40,11 @@
   <div class="navbar-end space-x-2">
     <!-- Theme Toggle Button -->
     <button 
-      @click="theme = theme === 'coffee' ? 'light' : 'coffee'"
+      @click="theme = theme === 'dark' ? 'light' : 'dark'"
       type="button"
       class="btn btn-ghost btn-circle"
       title="Toggle dark mode">
-      <ion-icon :name="theme === 'coffee' ? 'moon' : 'sunny'" size="large"></ion-icon>
+      <ion-icon :name="theme === 'dark' ? 'moon' : 'sunny'" size="large"></ion-icon>
     </button>
 
   @guest

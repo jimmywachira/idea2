@@ -18,7 +18,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased bg-base-100" style="font-family: 'Google Sans Code', sans-serif;">
+<body class="antialiased bg-base-100 font-bold capitalize" style="font-family: 'Google Sans Code', sans-serif;">
     <x-layout.navbar />
 
     <main>

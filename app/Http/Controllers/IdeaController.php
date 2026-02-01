@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateIdeaRequest;
 use App\Models\Idea;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
@@ -79,6 +80,8 @@ class IdeaController extends Controller
 
     #Display the specified resource.
     public function show(Idea $idea){
+
+        #Gate::authorize('manage', $idea);
         return view('ideas.show', ['idea' => $idea]);
     }
 

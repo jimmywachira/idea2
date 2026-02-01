@@ -12,6 +12,13 @@ class IdeaPolicy
     /**
      * Determine whether the user can view any models.
      */
+
+    public function manage(User $user, Idea $idea): bool
+    {
+        // Only the owner can manage (update/delete) the idea
+        return $idea->user_id === $user->id;
+    }
+    
     public function viewAny(User $user): bool
     {
         return false;
@@ -22,6 +29,16 @@ class IdeaPolicy
      */
     public function view(User $user, Idea $idea): bool
     {
+        // Owner always can view
+        if ($idea->user_id === $user->id) {
+            return true;
+        }
+
+        // If idea is shared in a team, team members can view
+        if ($idea->team_id && $idea->team->isMember($user)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -30,7 +47,7 @@ class IdeaPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return !$user->isBanned();
     }
 
     /**
@@ -38,7 +55,8 @@ class IdeaPolicy
      */
     public function update(User $user, Idea $idea): bool
     {
-        return false;
+        // Only the owner can update
+        return $idea->user_id === $user->id;
     }
 
     /**
@@ -46,7 +64,8 @@ class IdeaPolicy
      */
     public function delete(User $user, Idea $idea): bool
     {
-        return false;
+        // Only the owner can delete
+        return $idea->user_id === $user->id;
     }
 
     /**

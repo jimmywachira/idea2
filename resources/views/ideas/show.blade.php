@@ -293,5 +293,5 @@
         </div>
     </div>
 
-    @include('ideas.form-modal')
+    @include('ideas.modal')
 </x-layout>

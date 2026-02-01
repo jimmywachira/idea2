@@ -1,7 +1,7 @@
 @props(['name' => 'modal', 'title' => 'Modal Title'])
 
 <div 
-    x-data="{ show: false, name: @js($name),newStep: '', steps: [] }"
+    x-data="{ show: false, name: @js($name), newStep: '', steps: [] }"
     x-show="show"
     @open-modal.window="if ($event.detail?.name === name) show = true"
     @close-modal.window="show = false"

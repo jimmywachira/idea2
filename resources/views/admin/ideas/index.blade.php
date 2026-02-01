@@ -37,11 +37,7 @@
                                 
                                 <div class="mt-3 flex flex-wrap gap-2">
                                     <span class="badge badge-primary">{{ $idea->user->name }}</span>
-                                    <span class="badge" :class="@json({
-                                        'badge-warning': $idea->status->value === 'pending',
-                                        'badge-info': $idea->status->value === 'in_progress',
-                                        'badge-success': $idea->status->value === 'completed'
-                                    })">
+                                    <span class="badge {{ $idea->status->value === 'pending' ? 'badge-warning' : ($idea->status->value === 'in_progress' ? 'badge-info' : 'badge-success') }}">
                                         {{ $idea->status->label() }}
                                     </span>
                                     <span class="badge badge-ghost">{{ $idea->created_at->format('M d, Y') }}</span>

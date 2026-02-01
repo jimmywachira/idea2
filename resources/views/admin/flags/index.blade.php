@@ -57,12 +57,7 @@
                             </div>
 
                             <div class="flex flex-col gap-2 min-w-max">
-                                <span class="badge" :class="@json({
-                                    'badge-warning': $flag->status === 'pending',
-                                    'badge-info': $flag->status === 'reviewed',
-                                    'badge-success': $flag->status === 'resolved',
-                                    'badge-ghost': $flag->status === 'dismissed'
-                                })">
+                                <span class="badge {{ $flag->status === 'pending' ? 'badge-warning' : ($flag->status === 'reviewed' ? 'badge-info' : ($flag->status === 'resolved' ? 'badge-success' : 'badge-ghost')) }}">
                                     {{ ucfirst($flag->status) }}
                                 </span>
 

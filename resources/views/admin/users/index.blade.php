@@ -67,11 +67,7 @@
                                 </td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <div class="badge" :class="@json({
-                                        'badge-neutral': $user->role->value === 'user',
-                                        'badge-warning': $user->role->value === 'moderator',
-                                        'badge-error': $user->role->value === 'admin'
-                                    })">
+                                    <div class="badge {{ $user->role->value === 'user' ? 'badge-neutral' : ($user->role->value === 'moderator' ? 'badge-warning' : 'badge-error') }}">
                                         {{ $user->role->label() }}
                                     </div>
                                 </td>

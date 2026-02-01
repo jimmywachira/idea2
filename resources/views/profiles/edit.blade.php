@@ -7,7 +7,7 @@
                 <div role="alert" class="alert alert-error mb-6">
                     <ion-icon name="alert-circle"></ion-icon>
                     <div class="flex-1">
-                        <h3 class="font-bold text-sm">{{ count($errors) }} error(s) found</h3>
+                        <h3 class="font-bold">{{ count($errors) }} error(s) found</h3>
                         <ul class="list-disc list-inside text-xs mt-2">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -21,10 +21,45 @@
                 @csrf
                 @method('PUT')
 
+                <!-- Name -->
+                <div class="form-control">
+                    <label class="label" for="name">
+                        <span class="label-text sm:text-base">Full Name</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        value="{{ old('name', $user->name) }}"
+                        placeholder="Your full name"
+                        class="input input-bordered w-full sm:text-base focus:input-primary @error('name') input-error @enderror" />
+                    @error('name')
+                        <span class="text-error text-xs sm mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Email -->
+                <div class="form-control">
+                    <label class="label" for="email">
+                        <span class="label-text sm:text-base">Email Address</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        value="{{ old('email', $user->email) }}"
+                        placeholder="your@email.com"
+                        class="input input-bordered w-full sm:text-base focus:input-primary @error('email') input-error @enderror" />
+                    <span class="text-xs text-base-content/60 mt-2">Used for login and notifications</span>
+                    @error('email')
+                        <span class="text-error text-xs sm mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
                 <!-- Current Avatar -->
                 <div class="form-control">
-                    <label class="label font-medium">
-                        <span class="label-text text-sm sm:text-base">Current Avatar</span>
+                    <label class="label">
+                        <span class="label-text sm:text-base">Current Avatar</span>
                     </label>
                     <div class="flex items-center gap-4">
                         <div class="w-20 h-20 flex-shrink-0">
@@ -38,41 +73,94 @@
                                 </div>
                             @endif
                         </div>
-                        <span class="text-xs sm:text-sm text-base-content/60">Click below to change avatar</span>
+                        <span class="text-xs sm text-base-content/60">Click below to change avatar</span>
                     </div>
                 </div>
 
                 <!-- Avatar Upload -->
                 <div class="form-control">
-                    <label class="label font-medium" for="avatar">
-                        <span class="label-text text-sm sm:text-base">Upload New Avatar</span>
+                    <label class="label" for="avatar">
+                        <span class="label-text sm:text-base">Upload New Avatar</span>
                     </label>
                     <input 
                         type="file" 
                         id="avatar" 
                         name="avatar" 
                         accept="image/*"
-                        class="file-input file-input-bordered w-full focus:file-input-primary text-sm @error('avatar') file-input-error @enderror" />
+                        class="file-input file-input-bordered w-full focus:file-input-primary @error('avatar') file-input-error @enderror" />
                     <span class="text-xs text-base-content/60 mt-2">Max 2MB, formats: JPG, PNG, GIF</span>
                     @error('avatar')
-                        <span class="text-error text-xs sm:text-sm mt-1">{{ $message }}</span>
+                        <span class="text-error text-xs sm mt-1">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <!-- Bio -->
                 <div class="form-control">
-                    <label class="label font-medium" for="bio">
-                        <span class="label-text text-sm sm:text-base">Bio</span>
+                    <label class="label" for="bio">
+                        <span class="label-text sm:text-base">Bio</span>
                     </label>
                     <textarea 
                         id="bio" 
                         name="bio" 
                         rows="4"
                         placeholder="Tell us about yourself..."
-                        class="textarea textarea-bordered text-sm sm:text-base focus:textarea-primary @error('bio') textarea-error @enderror">{{ old('bio', $user->bio) }}</textarea>
+                        class="textarea textarea-bordered sm:text-base focus:textarea-primary @error('bio') textarea-error @enderror">{{ old('bio', $user->bio) }}</textarea>
                     <span class="text-xs text-base-content/60 mt-2">Max 500 characters</span>
                     @error('bio')
-                        <span class="text-error text-xs sm:text-sm mt-1">{{ $message }}</span>
+                        <span class="text-error text-xs sm mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Password Section -->
+                <div class="divider">Change Password (Optional)</div>
+
+                <!-- Current Password -->
+                <div class="form-control">
+                    <label class="label" for="current_password">
+                        <span class="label-text sm:text-base">Current Password</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        id="current_password" 
+                        name="current_password" 
+                        placeholder="Enter your current password"
+                        class="input input-bordered w-full sm:text-base focus:input-primary @error('current_password') input-error @enderror" />
+                    <span class="text-xs text-base-content/60 mt-2">Required if changing password</span>
+                    @error('current_password')
+                        <span class="text-error text-xs sm mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- New Password -->
+                <div class="form-control">
+                    <label class="label" for="password">
+                        <span class="label-text sm:text-base">New Password</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter new password (min 8 characters)"
+                        class="input input-bordered w-full sm:text-base focus:input-primary @error('password') input-error @enderror" />
+                    <span class="text-xs text-base-content/60 mt-2">Leave blank to keep current password</span>
+                    @error('password')
+                        <span class="text-error text-xs sm mt-1">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-control">
+                    <label class="label" for="password_confirmation">
+                        <span class="label-text sm:text-base">Confirm New Password</span>
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password_confirmation" 
+                        name="password_confirmation" 
+                        placeholder="Confirm new password"
+                        class="input input-bordered w-full sm:text-base focus:input-primary @error('password_confirmation') input-error @enderror" />
+                    @error('password_confirmation')
+                        <span class="text-error text-xs sm mt-1">{{ $message }}</span>
                     @enderror
                 </div>
 
