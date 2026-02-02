@@ -17,6 +17,13 @@ Route::get('/', function () {
 })->name('home');
 Route::get('/about', fn () => view('about'))->name('about');
 
+// Public Pages
+Route::get('/resources', fn () => view('resources'))->name('resources');
+Route::get('/documentation', fn () => view('documentation'))->name('documentation');
+Route::get('/community-guidelines', fn () => view('community-guidelines'))->name('community-guidelines');
+Route::get('/privacy-policy', fn () => view('privacy-policy'))->name('privacy-policy');
+Route::get('/terms-of-service', fn () => view('terms-of-service'))->name('terms-of-service');
+
 // Dashboard - Main single-page application
 Route::get('/dashboard', Dashboard::class)->middleware('auth')->name('dashboard');
 

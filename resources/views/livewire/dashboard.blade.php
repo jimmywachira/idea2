@@ -82,6 +82,7 @@
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
+                @method('DELETE')
                 <button type="submit" class="w-full btn btn-ghost btn-sm gap-2">
                     <ion-icon name="log-out"></ion-icon>
                     <span>Logout</span>
